@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Video Player</title>
+<title>Player</title>
 
 <style>
 *{
@@ -15,231 +15,452 @@
 }
 
 body{
-    background:#111;
+    background:#0f0f0f;
     color:#fff;
 }
 
+/* HEADER */
 header{
     background:#000;
-    padding:15px;
-    border-bottom:1px solid #333;
+    padding:12px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #222;
 }
 
 .logo{
-    font-size:28px;
-    font-weight:bold;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    background:#ff6600;
+    border:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+/* LAYOUT */
 .container{
-    width:95%;
-    max-width:1400px;
-    margin:15px auto;
+    max-width:1300px;
+    margin:auto;
+    padding:15px;
 }
 
 .layout{
     display:grid;
-    grid-template-columns:3fr 1fr;
+    grid-template-columns: 2.5fr 1fr;
     gap:20px;
 }
 
-.player-section{
-    width:100%;
-}
-
+/* PLAYER */
 .video-player{
     width:100%;
     aspect-ratio:16/9;
     background:#000;
-    border-radius:8px;
+    border-radius:10px;
     overflow:hidden;
 }
 
-.video-player iframe,
-.video-player video{
+.video-player iframe{
     width:100%;
     height:100%;
     border:none;
 }
 
-.video-title{
-    font-size:24px;
-    margin-top:15px;
+/* TITLE */
+.title{
+    font-size:22px;
+    margin-top:12px;
+    font-weight:600;
 }
 
-.video-stats{
+/* META */
+.meta{
     color:#aaa;
+    font-size:13px;
+    margin-top:6px;
+}
+
+/* ADS */
+.ad{
+    background:#1c1c1c;
+    border:1px dashed #333;
+    padding:20px;
+    text-align:center;
+    margin:15px 0;
+    color:#777;
+    border-radius:8px;
+}
+
+/* DESCRIPTION */
+.desc{
+    background:#151515;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+    color:#ccc;
+    line-height:1.5;
+}
+
+/* COMMENTS */
+#comments{
+    margin-top:10px;
+}
+
+.comment{
+    background:#1a1a1a;
+    padding:10px;
+    margin:6px 0;
+    border-radius:6px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+}
+
+.post{
+    width:100%;
     margin-top:8px;
 }
 
-.action-bar{
+/* SIDEBAR */
+.sidebar{
+    position:sticky;
+    top:10px;
+    height:fit-content;
+}
+
+.related{
     display:flex;
     gap:10px;
-    margin:15px 0;
-    flex-wrap:wrap;
-}
-
-.action-btn{
-    background:#222;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-.ad-slot{
-    min-height:90px;
-    background:#222;
-    border:1px dashed #555;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#888;
-    margin:15px 0;
-}
-
-.description{
-    background:#181818;
-    padding:15px;
-    border-radius:8px;
-    line-height:1.6;
-}
-
-.sidebar h3{
-    margin-bottom:10px;
-}
-
-.related-video{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
+    margin:10px 0;
     text-decoration:none;
     color:white;
 }
 
-.related-video img{
-    width:160px;
-    border-radius:5px;
+.related img{
+    width:120px;
+    border-radius:6px;
+}
+.video-player{
+  position:relative;
 }
 
-.related-info{
-    font-size:14px;
+.related small{
+    color:#aaa;
 }
 
-.related-meta{
-    color:#999;
-    font-size:12px;
-    margin-top:5px;
-}
-
+/* MOBILE */
 @media(max-width:900px){
-
 .layout{
     grid-template-columns:1fr;
 }
 
-.related-video img{
-    width:120px;
+.sidebar{
+    position:static;
+}
+
+.title{
+    font-size:18px;
 }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">VIDEO SITE</div>
+<div class="logo">AFFROXXX</div>
+
+<div class="header-actions">
+<button class="btn" onclick="openWA()">Join WhatsApp</button>
+<button class="btn" id="authBtn">Login</button>
+</div>
 </header>
 
 <div class="container">
 
 <div class="layout">
 
-<div class="player-section">
+<!-- LEFT -->
+<div>
 
 <div class="video-player">
+  
+  <!-- AD PLAYER -->
+  <iframe id="adPlayer"></iframe>
 
-<!-- Replace with your video source -->
+  <!-- MAIN PLAYER -->
+  <iframe id="player" style="display:none;"></iframe>
 
-<video controls poster="thumbnail.jpg">
-<source src="video.mp4" type="video/mp4">
-</video>
-
-</div>
-
-<h1 class="video-title">Video Title Here</h1>
-
-<div class="video-stats">
-1,245,897 views • Uploaded May 2026
-</div>
-
-<div class="action-bar">
-<button class="action-btn">👍 Like</button>
-<button class="action-btn">⭐ Favorite</button>
-<button class="action-btn">🔗 Share</button>
-<button class="action-btn">⬇ Download</button>
-</div>
-
-<div class="ad-slot">
-PLAYER TOP AD
-</div>
-
-<div class="description">
-<p>
-Add your video description here.
-</p>
-</div>
-
-<div class="ad-slot">
-PLAYER BOTTOM AD
-</div>
+  <button id="skipBtn" style="
+    display:none;
+    position:absolute;
+    right:20px;
+    top:20px;
+    padding:8px 12px;
+    background:#ff6600;
+    border:none;
+    color:white;
+    cursor:pointer;
+    z-index:10;
+  ">
+    Skip Ad
+  </button>
 
 </div>
 
+<div class="title" id="title">Loading...</div>
+
+<div class="meta" id="meta"></div>
+
+<div class="ad" id="ad-top">Voluum Ad Slot</div>
+
+<div class="desc" id="desc"></div>
+
+<div class="ad">JuicyAds Slot</div>
+
+<h3 style="margin-top:15px;">Comments</h3>
+
+<div id="comments"></div>
+
+<input id="commentInput" placeholder="Write comment...">
+<button class="btn post" onclick="postComment()">Post Comment</button>
+
+<div class="ad">Mobidea Slot</div>
+
+</div>
+
+<!-- RIGHT -->
 <div class="sidebar">
 
-<div class="ad-slot">
-300x250 AD
-</div>
+<div class="ad">300x250 Ad Slot</div>
 
 <h3>Related Videos</h3>
 
-<a href="#" class="related-video">
+<a class="related" href="#">
 <img src="https://via.placeholder.com/320x180">
-<div class="related-info">
-<div>Related Video Title</div>
-<div class="related-meta">854K Views</div>
+<div>
+<div>Related Video</div>
+<small>1.2M views</small>
 </div>
 </a>
 
-<a href="#" class="related-video">
+<a class="related" href="#">
 <img src="https://via.placeholder.com/320x180">
-<div class="related-info">
-<div>Related Video Title</div>
-<div class="related-meta">622K Views</div>
-</div>
-</a>
-
-<a href="#" class="related-video">
-<img src="https://via.placeholder.com/320x180">
-<div class="related-info">
-<div>Related Video Title</div>
-<div class="related-meta">412K Views</div>
-</div>
-</a>
-
-<a href="#" class="related-video">
-<img src="https://via.placeholder.com/320x180">
-<div class="related-info">
-<div>Related Video Title</div>
-<div class="related-meta">1.2M Views</div>
+<div>
+<div>Related Video</div>
+<small>800K views</small>
 </div>
 </a>
 
 </div>
 
 </div>
-
 </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+getFirestore, doc, getDoc,
+collection, addDoc, query,
+where, getDocs, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import {
+getAuth, GoogleAuthProvider,
+signInWithPopup, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyALWW2yra6_6Hxr-hWQdXXXF0DDMOShq3k",
+  authDomain: "affroxxx.firebaseapp.com",
+  projectId: "affroxxx",
+  storageBucket: "affroxxx.firebasestorage.app",
+  messagingSenderId: "201165572616",
+  appId: "1:201165572616:web:bcd3d24fae7be3cdec9fbd",
+  measurementId: "G-PBDB62DXBT"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const id = new URLSearchParams(location.search).get("id");
+
+let user = null;
+
+/* AUTH */
+onAuthStateChanged(auth,(u)=>{
+user = u;
+document.getElementById("authBtn").innerText = u ? "Logout" : "Login";
+});
+
+document.getElementById("authBtn").onclick = async ()=>{
+if(user){
+await auth.signOut();
+}else{
+const p = new GoogleAuthProvider();
+await signInWithPopup(auth,p);
+}
+};
+
+/* WHATSAPP */
+window.openWA = ()=>{
+window.open("https://chat.whatsapp.com/YOUR_GROUP","_blank");
+};
+
+/* LOAD VIDEO */
+async function loadVideo(){
+
+  const snap = await getDoc(doc(db,"videos",id));
+  const v = snap.data();
+
+  document.getElementById("title").innerText = v.title;
+  document.getElementById("desc").innerText = v.description || "";
+  document.getElementById("meta").innerText = (v.views||0)+" views";
+
+  document.getElementById("player").src = v.embed_url;
+
+  // START AD FIRST
+  playAd();
+
+  loadComments();
+  loadRelated(v);
+}
+
+/* ADS FROM FIREBASE (optional fields) */
+if(v.ads){
+document.getElementById("ad-top").innerText = v.ads.top || "Ad Slot";
+}
+
+loadComments();
+}
+
+/* COMMENTS */
+async function loadComments(){
+
+const q = query(collection(db,"comments"), where("videoId","==",id));
+const snap = await getDocs(q);
+
+const box = document.getElementById("comments");
+box.innerHTML = "";
+
+snap.forEach(d=>{
+const c = d.data();
+box.innerHTML += `
+<div class="comment">
+<b>${c.userName || "Guest"}</b><br>
+${c.text}
+</div>`;
+});
+}
+
+/* POST COMMENT */
+window.postComment = async ()=>{
+
+if(!user){
+alert("Login required");
+return;
+}
+
+const text = document.getElementById("commentInput").value;
+
+if(!text) return;
+
+await addDoc(collection(db,"comments"),{
+videoId:id,
+text,
+userName:user.displayName,
+createdAt:serverTimestamp()
+});
+
+document.getElementById("commentInput").value="";
+loadComments();
+};
+async function loadRelated(currentVideo){
+
+  const snap = await getDocs(collection(db,"videos"));
+
+  const currentTags = currentVideo.tags || [];
+  const currentTitleWords = (currentVideo.title || "").toLowerCase().split(" ");
+
+  let scored = [];
+
+  snap.forEach(d => {
+    const v = d.data();
+
+    if(d.id === id) return;
+
+    let score = 0;
+
+    // 1. COUNTRY MATCH
+    if(v.country && currentVideo.country && v.country === currentVideo.country){
+      score += 3;
+    }
+
+    // 2. TAG MATCH
+    if(v.tags && currentTags.length){
+      v.tags.forEach(tag => {
+        if(currentTags.includes(tag)){
+          score += 2;
+        }
+      });
+    }
+
+    // 3. TITLE SIMILARITY
+    const titleWords = (v.title || "").toLowerCase().split(" ");
+    titleWords.forEach(word => {
+      if(currentTitleWords.includes(word)){
+        score += 1;
+      }
+    });
+
+    scored.push({ id: d.id, ...v, score });
+  });
+
+  // sort best matches first
+  scored.sort((a,b) => b.score - a.score);
+
+  const box = document.querySelector(".sidebar");
+
+  box.innerHTML = `
+    <div class="ad">300x250 Ad Slot</div>
+    <h3>Recommended Videos</h3>
+  `;
+
+  scored.slice(0,6).forEach(v=>{
+    box.innerHTML += `
+      <a class="related" href="watch.html?id=${v.id}">
+        <img src="${v.thumbnail}">
+        <div>
+          <div>${v.title}</div>
+          <small>${v.views || 0} views</small>
+        </div>
+      </a>
+    `;
+  });
+}
+loadVideo();
+
+</script>
 
 </body>
 </html>
