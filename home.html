@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tube Site</title>
+<title>Affroxxx</title>
 
 <style>
 *{
@@ -183,7 +183,7 @@ footer{
 <header>
 
 <div class="topbar">
-<div class="logo">TUBE</div>
+<div class="logo">AFFROXXX</div>
 
 <div class="search">
 <input type="text" placeholder="Search videos...">
@@ -303,12 +303,106 @@ NATIVE / BANNER AD SLOT
 </div>
 
 <footer>
-© 2026 Tube Site. All Rights Reserved.
+© 2026 Affroxx. All Rights Reserved.
 </footer>
 
 <div class="sticky-footer-ad">
 STICKY FOOTER AD
 </div>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyALWW2yra6_6Hxr-hWQdXXXF0DDMOShq3k",
+  authDomain: "affroxxx.firebaseapp.com",
+  projectId: "affroxxx",
+  storageBucket: "affroxxx.firebasestorage.app",
+  messagingSenderId: "201165572616",
+  appId: "1:201165572616:web:bcd3d24fae7be3cdec9fbd",
+  measurementId: "G-PBDB62DXBT"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let allVideos = [];
+
+/* LOAD VIDEOS */
+async function loadVideos(){
+
+  const snap = await getDocs(collection(db,"videos"));
+
+  allVideos = [];
+
+  snap.forEach(doc => {
+    allVideos.push({id:doc.id, ...doc.data()});
+  });
+
+  renderVideos(allVideos);
+}
+
+/* RENDER GRID */
+function renderVideos(videos){
+
+  const grid = document.querySelector(".video-grid");
+
+  grid.innerHTML = "";
+
+  videos.forEach(v => {
+
+    grid.innerHTML += `
+      <a href="watch.html?id=${v.id}" class="video-card" style="text-decoration:none;color:white">
+
+        <div class="thumbnail">
+          <img src="${v.thumbnail}">
+          <div class="duration">${v.duration || "00:00"}</div>
+        </div>
+
+        <div class="video-info">
+          <div class="video-title">${v.title}</div>
+          <div class="video-meta">${v.views || 0} views • ${v.category || ""}</div>
+        </div>
+
+      </a>
+    `;
+  });
+}
+
+/* CATEGORY FILTER */
+document.querySelectorAll(".categories a").forEach(cat => {
+  cat.addEventListener("click",(e)=>{
+    e.preventDefault();
+
+    const text = cat.innerText.toLowerCase();
+
+    const filtered = allVideos.filter(v =>
+      (v.category || "").toLowerCase() === text ||
+      (v.tags || []).includes(text)
+    );
+
+    renderVideos(filtered);
+  });
+});
+
+/* SEARCH */
+document.querySelector(".search button").addEventListener("click",()=>{
+  const q = document.querySelector(".search input").value.toLowerCase();
+
+  const filtered = allVideos.filter(v =>
+    v.title.toLowerCase().includes(q)
+  );
+
+  renderVideos(filtered);
+});
+
+loadVideos();
+
+</script>
 </body>
 </html>
