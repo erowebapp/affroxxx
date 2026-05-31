@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Video Player</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#111;
+    color:#fff;
+}
+
+header{
+    background:#000;
+    padding:15px;
+    border-bottom:1px solid #333;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:15px auto;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:3fr 1fr;
+    gap:20px;
+}
+
+.player-section{
+    width:100%;
+}
+
+.video-player{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.video-player iframe,
+.video-player video{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+.video-title{
+    font-size:24px;
+    margin-top:15px;
+}
+
+.video-stats{
+    color:#aaa;
+    margin-top:8px;
+}
+
+.action-bar{
+    display:flex;
+    gap:10px;
+    margin:15px 0;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    background:#222;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.ad-slot{
+    min-height:90px;
+    background:#222;
+    border:1px dashed #555;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#888;
+    margin:15px 0;
+}
+
+.description{
+    background:#181818;
+    padding:15px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.sidebar h3{
+    margin-bottom:10px;
+}
+
+.related-video{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.related-video img{
+    width:160px;
+    border-radius:5px;
+}
+
+.related-info{
+    font-size:14px;
+}
+
+.related-meta{
+    color:#999;
+    font-size:12px;
+    margin-top:5px;
+}
+
+@media(max-width:900px){
+
+.layout{
+    grid-template-columns:1fr;
+}
+
+.related-video img{
+    width:120px;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">VIDEO SITE</div>
+</header>
+
+<div class="container">
+
+<div class="layout">
+
+<div class="player-section">
+
+<div class="video-player">
+
+<!-- Replace with your video source -->
+
+<video controls poster="thumbnail.jpg">
+<source src="video.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<h1 class="video-title">Video Title Here</h1>
+
+<div class="video-stats">
+1,245,897 views • Uploaded May 2026
+</div>
+
+<div class="action-bar">
+<button class="action-btn">👍 Like</button>
+<button class="action-btn">⭐ Favorite</button>
+<button class="action-btn">🔗 Share</button>
+<button class="action-btn">⬇ Download</button>
+</div>
+
+<div class="ad-slot">
+PLAYER TOP AD
+</div>
+
+<div class="description">
+<p>
+Add your video description here.
+</p>
+</div>
+
+<div class="ad-slot">
+PLAYER BOTTOM AD
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div class="ad-slot">
+300x250 AD
+</div>
+
+<h3>Related Videos</h3>
+
+<a href="#" class="related-video">
+<img src="https://via.placeholder.com/320x180">
+<div class="related-info">
+<div>Related Video Title</div>
+<div class="related-meta">854K Views</div>
+</div>
+</a>
+
+<a href="#" class="related-video">
+<img src="https://via.placeholder.com/320x180">
+<div class="related-info">
+<div>Related Video Title</div>
+<div class="related-meta">622K Views</div>
+</div>
+</a>
+
+<a href="#" class="related-video">
+<img src="https://via.placeholder.com/320x180">
+<div class="related-info">
+<div>Related Video Title</div>
+<div class="related-meta">412K Views</div>
+</div>
+</a>
+
+<a href="#" class="related-video">
+<img src="https://via.placeholder.com/320x180">
+<div class="related-info">
+<div>Related Video Title</div>
+<div class="related-meta">1.2M Views</div>
+</div>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tube Site</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#111;
+    color:#fff;
+}
+
+header{
+    background:#000;
+    padding:15px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #333;
+}
+
+.topbar{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#ff6600;
+}
+
+.search{
+    flex:1;
+    display:flex;
+}
+
+.search input{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:4px 0 0 4px;
+}
+
+.search button{
+    padding:10px 20px;
+    border:none;
+    background:#ff6600;
+    color:white;
+    cursor:pointer;
+}
+
+.categories{
+    background:#181818;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:10px;
+}
+
+.categories a{
+    color:#ddd;
+    text-decoration:none;
+    margin-right:15px;
+    display:inline-block;
+}
+
+.categories a:hover{
+    color:#ff6600;
+}
+
+.ad{
+    width:100%;
+    min-height:90px;
+    background:#222;
+    border:1px dashed #555;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:15px 0;
+    color:#999;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:15px;
+    margin-top:15px;
+}
+
+.video-card{
+    background:#181818;
+    border-radius:6px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.video-card:hover{
+    transform:scale(1.03);
+}
+
+.thumbnail{
+    position:relative;
+}
+
+.thumbnail img{
+    width:100%;
+    display:block;
+}
+
+.duration{
+    position:absolute;
+    bottom:8px;
+    right:8px;
+    background:black;
+    padding:3px 6px;
+    font-size:12px;
+    border-radius:3px;
+}
+
+.video-info{
+    padding:10px;
+}
+
+.video-title{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.video-meta{
+    color:#999;
+    font-size:12px;
+}
+
+footer{
+    margin-top:40px;
+    padding:30px;
+    text-align:center;
+    background:#000;
+    color:#777;
+}
+
+.sticky-footer-ad{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#222;
+    border-top:1px solid #444;
+    text-align:center;
+    padding:10px;
+    z-index:999;
+}
+
+@media(max-width:600px){
+    .logo{
+        font-size:22px;
+    }
+
+    .search button{
+        padding:10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="topbar">
+<div class="logo">TUBE</div>
+
+<div class="search">
+<input type="text" placeholder="Search videos...">
+<button>Search</button>
+</div>
+</div>
+
+</header>
+
+<div class="categories">
+<a href="#">Trending</a>
+<a href="#">New</a>
+<a href="#">Popular</a>
+<a href="#">Category 1</a>
+<a href="#">Category 2</a>
+<a href="#">Category 3</a>
+<a href="#">Category 4</a>
+<a href="#">Category 5</a>
+</div>
+
+<div class="container">
+
+<!-- Top Banner Ad -->
+<div class="ad">
+TOP BANNER AD (728x90)
+</div>
+
+<div class="video-grid">
+
+<!-- Video Card -->
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180" alt="">
+<div class="duration">12:34</div>
+</div>
+
+<div class="video-info">
+<div class="video-title">Sample Video Title</div>
+<div class="video-meta">1.2M Views</div>
+</div>
+</div>
+
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180" alt="">
+<div class="duration">08:52</div>
+</div>
+
+<div class="video-info">
+<div class="video-title">Sample Video Title</div>
+<div class="video-meta">825K Views</div>
+</div>
+</div>
+
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180" alt="">
+<div class="duration">15:12</div>
+</div>
+
+<div class="video-info">
+<div class="video-title">Sample Video Title</div>
+<div class="video-meta">500K Views</div>
+</div>
+</div>
+
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180" alt="">
+<div class="duration">06:40</div>
+</div>
+
+<div class="video-info">
+<div class="video-title">Sample Video Title</div>
+<div class="video-meta">2.1M Views</div>
+</div>
+</div>
+
+</div>
+
+<!-- Mid Page Ad -->
+<div class="ad">
+NATIVE / BANNER AD SLOT
+</div>
+
+<div class="video-grid">
+
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180">
+<div class="duration">09:41</div>
+</div>
+<div class="video-info">
+<div class="video-title">Another Video</div>
+<div class="video-meta">950K Views</div>
+</div>
+</div>
+
+<div class="video-card">
+<div class="thumbnail">
+<img src="https://via.placeholder.com/320x180">
+<div class="duration">14:22</div>
+</div>
+<div class="video-info">
+<div class="video-title">Another Video</div>
+<div class="video-meta">430K Views</div>
+</div>
+</div>
+
+</div>
+
+<!-- Large Ad -->
+<div class="ad">
+300x250 / 336x280 AD SLOT
+</div>
+
+</div>
+
+<footer>
+© 2026 Tube Site. All Rights Reserved.
+</footer>
+
+<div class="sticky-footer-ad">
+STICKY FOOTER AD
+</div>
+
+</body>
+</html>
