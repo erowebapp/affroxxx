@@ -342,6 +342,7 @@ async function loadVideos(){
   });
 
   renderVideos(allVideos);
+buildMenus(allVideos);
 }
 
 /* RENDER GRID */
@@ -371,21 +372,6 @@ function renderVideos(videos){
   });
 }
 
-/* CATEGORY FILTER */
-document.querySelectorAll(".categories a").forEach(cat => {
-  cat.addEventListener("click",(e)=>{
-    e.preventDefault();
-
-    const text = cat.innerText.toLowerCase();
-
-    const filtered = allVideos.filter(v =>
-      (v.category || "").toLowerCase() === text ||
-      (v.tags || []).includes(text)
-    );
-
-    renderVideos(filtered);
-  });
-});
 
 /* SEARCH */
 document.querySelector(".search button").addEventListener("click",()=>{
