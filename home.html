@@ -193,13 +193,14 @@ footer{
 
 </header>
 
-<div class="categories" id="categoriesBar">
-    <a href="#" data-filter="all">All Categories</a>
-</div>
+const categoriesBar = document.getElementById("categoriesBar");
+const countriesBar = document.getElementById("countriesBar");
 
-<div class="categories" id="countriesBar">
-    <a href="#" data-country="all">All Countries</a>
-</div>
+categoriesBar.innerHTML =
+  '<a href="#" data-filter="all">All Categories</a>';
+
+countriesBar.innerHTML =
+  '<a href="#" data-country="all">All Countries</a>';
 
 <div class="container">
 
