@@ -1,9 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="6a97888e-site-verification" content="32666ae4b62307f5635f0083b2097da1">
     <meta name="juicyads-site-verification" content="25af52d0c9a5d49bd93a3df9e7152950">
 <title>Affroxxx</title>
 
@@ -12,7 +11,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -21,18 +20,18 @@ body{
 }
 
 header{
-    background:#000;
-    padding:15px;
     position:sticky;
     top:0;
     z-index:1000;
+    background:#000;
     border-bottom:1px solid #333;
+    padding:15px;
 }
 
 .topbar{
     display:flex;
-    align-items:center;
     gap:15px;
+    align-items:center;
 }
 
 .logo{
@@ -48,47 +47,41 @@ header{
 
 .search input{
     flex:1;
-    padding:10px;
+    padding:12px;
     border:none;
-    border-radius:4px 0 0 4px;
+    outline:none;
+    border-radius:5px 0 0 5px;
 }
 
 .search button{
-    padding:10px 20px;
+    padding:12px 20px;
     border:none;
     background:#ff6600;
-    color:white;
+    color:#fff;
     cursor:pointer;
 }
 
-.categories{
+.filter-bar{
     background:#181818;
+    padding:10px;
     overflow-x:auto;
     white-space:nowrap;
-    padding:10px;
 }
 
-.categories a{
+.filter-bar a{
+    display:inline-block;
+    background:#222;
     color:#ddd;
     text-decoration:none;
-    margin-right:15px;
-    display:inline-block;
+    padding:8px 12px;
+    border-radius:20px;
+    margin-right:8px;
+    margin-bottom:5px;
 }
 
-.categories a:hover{
-    color:#ff6600;
-}
-
-.ad{
-    width:100%;
-    min-height:90px;
-    background:#222;
-    border:1px dashed #555;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:15px 0;
-    color:#999;
+.filter-bar a:hover{
+    background:#ff6600;
+    color:white;
 }
 
 .container{
@@ -97,22 +90,36 @@ header{
     margin:auto;
 }
 
+.ad{
+    margin:15px 0;
+    min-height:90px;
+    border:1px dashed #555;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#888;
+}
+
 .video-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
     gap:15px;
     margin-top:15px;
 }
 
 .video-card{
+    display:block;
+    text-decoration:none;
+    color:white;
     background:#181818;
-    border-radius:6px;
+    border-radius:8px;
     overflow:hidden;
-    transition:.3s;
+    transition:.2s;
 }
 
 .video-card:hover{
-    transform:scale(1.03);
+    transform:translateY(-3px);
 }
 
 .thumbnail{
@@ -126,12 +133,12 @@ header{
 
 .duration{
     position:absolute;
-    bottom:8px;
     right:8px;
-    background:black;
+    bottom:8px;
+    background:rgba(0,0,0,.85);
     padding:3px 6px;
     font-size:12px;
-    border-radius:3px;
+    border-radius:4px;
 }
 
 .video-info{
@@ -141,11 +148,18 @@ header{
 .video-title{
     font-size:14px;
     margin-bottom:8px;
+    line-height:1.4;
 }
 
 .video-meta{
-    color:#999;
+    color:#aaa;
     font-size:12px;
+}
+
+.no-results{
+    text-align:center;
+    padding:40px;
+    color:#999;
 }
 
 footer{
@@ -156,26 +170,16 @@ footer{
     color:#777;
 }
 
-.sticky-footer-ad{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#222;
-    border-top:1px solid #444;
-    text-align:center;
-    padding:10px;
-    z-index:999;
-}
-
 @media(max-width:600px){
+
     .logo{
         font-size:22px;
     }
 
     .search button{
-        padding:10px;
+        padding:12px;
     }
+
 }
 </style>
 </head>
@@ -184,28 +188,28 @@ footer{
 <header>
 
 <div class="topbar">
+
 <div class="logo">AFFROXXX</div>
 
 <div class="search">
-<input type="text" placeholder="Search videos...">
-<button>Search</button>
+<input id="searchInput" type="text" placeholder="Search videos...">
+<button id="searchBtn">Search</button>
 </div>
+
 </div>
 
 </header>
-<script>
-const categoriesBar = document.getElementById("categoriesBar");
-const countriesBar = document.getElementById("countriesBar");
 
-categoriesBar.innerHTML =
-  '<a href="#" data-filter="all">All Categories</a>';
+<div class="filter-bar" id="categoriesBar">
+<a href="#" data-filter="all">All Categories</a>
+</div>
 
-countriesBar.innerHTML =
-  '<a href="#" data-country="all">All Countries</a>';
-</script>
+<div class="filter-bar" id="countriesBar">
+<a href="#" data-country="all">All Countries</a>
+</div>
+
 <div class="container">
 
-<!-- Top Banner Ad -->
 <div class="ad">
 <!-- JuicyAds v3.0 -->
 <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
@@ -214,60 +218,8 @@ countriesBar.innerHTML =
 <!--JuicyAds END-->
 </div>
 
-<div class="video-grid">
+<div id="videoGrid" class="video-grid"></div>
 
-<!-- Video Card -->
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180" alt="">
-<div class="duration">12:34</div>
-</div>
-
-<div class="video-info">
-<div class="video-title">Sample Video Title</div>
-<div class="video-meta">1.2M Views</div>
-</div>
-</div>
-
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180" alt="">
-<div class="duration">08:52</div>
-</div>
-
-<div class="video-info">
-<div class="video-title">Sample Video Title</div>
-<div class="video-meta">825K Views</div>
-</div>
-</div>
-
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180" alt="">
-<div class="duration">15:12</div>
-</div>
-
-<div class="video-info">
-<div class="video-title">Sample Video Title</div>
-<div class="video-meta">500K Views</div>
-</div>
-</div>
-
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180" alt="">
-<div class="duration">06:40</div>
-</div>
-
-<div class="video-info">
-<div class="video-title">Sample Video Title</div>
-<div class="video-meta">2.1M Views</div>
-</div>
-</div>
-
-</div>
-
-<!-- Mid Page Ad -->
 <div class="ad">
 <!-- JuicyAds v3.0 -->
 <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
@@ -275,33 +227,6 @@ countriesBar.innerHTML =
 <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':1119125});</script>
 <!--JuicyAds END-->
 </div>
-
-<div class="video-grid">
-
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180">
-<div class="duration">09:41</div>
-</div>
-<div class="video-info">
-<div class="video-title">Another Video</div>
-<div class="video-meta">950K Views</div>
-</div>
-</div>
-
-<div class="video-card">
-<div class="thumbnail">
-<img src="https://via.placeholder.com/320x180">
-<div class="duration">14:22</div>
-</div>
-<div class="video-info">
-<div class="video-title">Another Video</div>
-<div class="video-meta">430K Views</div>
-</div>
-</div>
-
-</div>
-
 <!-- Large Ad -->
 <div class="ad">
 <!-- JuicyAds v3.0 -->
@@ -310,13 +235,11 @@ countriesBar.innerHTML =
 <script type="text/javascript" data-cfasync="false" async>(adsbyjuicy = window.adsbyjuicy || []).push({'adzone':1119127});</script>
 <!--JuicyAds END-->
 </div>
-
 </div>
 
 <footer>
-© 2026 Affroxx. All Rights Reserved.
+© 2026 Affroxxx
 </footer>
-
 <div class="sticky-footer-ad">
 <!-- JuicyAds v3.0 -->
 <script type="text/javascript" data-cfasync="false" async src="https://poweredby.jads.co/js/jads.js"></script>
@@ -326,29 +249,41 @@ countriesBar.innerHTML =
 </div>
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
   getFirestore,
   collection,
   getDocs
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+/* FIREBASE */
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyALWW2yra6_6Hxr-hWQdXXXF0DDMOShq3k",
   authDomain: "affroxxx.firebaseapp.com",
   projectId: "affroxxx",
   storageBucket: "affroxxx.firebasestorage.app",
   messagingSenderId: "201165572616",
-  appId: "1:201165572616:web:bcd3d24fae7be3cdec9fbd",
-  measurementId: "G-PBDB62DXBT"
+  appId: "1:201165572616:web:bcd3d24fae7be3cdec9fbd"
+
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+/* STATE */
+
 let allVideos = [];
 
+let selectedCategory = "all";
+let selectedCountry = "all";
+
 /* LOAD VIDEOS */
+
 async function loadVideos(){
 
   const snap = await getDocs(collection(db,"videos"));
@@ -356,56 +291,222 @@ async function loadVideos(){
   allVideos = [];
 
   snap.forEach(doc => {
-    allVideos.push({id:doc.id, ...doc.data()});
+
+    allVideos.push({
+      id: doc.id,
+      ...doc.data()
+    });
+
   });
 
   renderVideos(allVideos);
-buildMenus(allVideos);
+
+  buildMenus(allVideos);
 }
 
-/* RENDER GRID */
+/* BUILD FILTER MENUS */
+
+function buildMenus(videos){
+
+  const categoriesBar =
+    document.getElementById("categoriesBar");
+
+  const countriesBar =
+    document.getElementById("countriesBar");
+
+  categoriesBar.innerHTML =
+    '<a href="#" data-filter="all">All Categories</a>';
+
+  countriesBar.innerHTML =
+    '<a href="#" data-country="all">All Countries</a>';
+
+  const categories = [
+    ...new Set(
+      videos
+      .map(v => v.category)
+      .filter(Boolean)
+    )
+  ];
+
+  const countries = [
+    ...new Set(
+      videos
+      .map(v => v.country)
+      .filter(Boolean)
+    )
+  ];
+
+  categories.forEach(cat => {
+
+    categoriesBar.innerHTML +=
+      `<a href="#" data-filter="${cat}">
+        ${cat}
+      </a>`;
+
+  });
+
+  countries.forEach(country => {
+
+    countriesBar.innerHTML +=
+      `<a href="#" data-country="${country}">
+        ${country}
+      </a>`;
+
+  });
+
+  attachFilters();
+}
+
+/* FILTERS */
+
+function attachFilters(){
+
+  document.querySelectorAll("[data-filter]")
+  .forEach(btn => {
+
+    btn.onclick = e => {
+
+      e.preventDefault();
+
+      selectedCategory =
+        btn.dataset.filter;
+
+      applyFilters();
+    };
+
+  });
+
+  document.querySelectorAll("[data-country]")
+  .forEach(btn => {
+
+    btn.onclick = e => {
+
+      e.preventDefault();
+
+      selectedCountry =
+        btn.dataset.country;
+
+      applyFilters();
+    };
+
+  });
+}
+
+function applyFilters(){
+
+  let filtered = [...allVideos];
+
+  if(selectedCategory !== "all"){
+
+    filtered = filtered.filter(v =>
+      (v.category || "").toLowerCase()
+      === selectedCategory.toLowerCase()
+    );
+
+  }
+
+  if(selectedCountry !== "all"){
+
+    filtered = filtered.filter(v =>
+      (v.country || "").toLowerCase()
+      === selectedCountry.toLowerCase()
+    );
+
+  }
+
+  renderVideos(filtered);
+}
+
+/* SEARCH */
+
+document.getElementById("searchBtn")
+.addEventListener("click", () => {
+
+  const q =
+    document.getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  const filtered = allVideos.filter(v =>
+
+    (v.title || "")
+    .toLowerCase()
+    .includes(q)
+
+  );
+
+  renderVideos(filtered);
+
+});
+
+/* RENDER */
+
 function renderVideos(videos){
 
-  const grid = document.querySelector(".video-grid");
+  const grid =
+    document.getElementById("videoGrid");
+
+  if(videos.length === 0){
+
+    grid.innerHTML =
+      '<div class="no-results">No videos found.</div>';
+
+    return;
+  }
 
   grid.innerHTML = "";
 
   videos.forEach(v => {
 
     grid.innerHTML += `
-      <a href="watch.html?id=${v.id}" class="video-card" style="text-decoration:none;color:white">
+
+      <a href="watch.html?id=${v.id}"
+         class="video-card">
 
         <div class="thumbnail">
-          <img src="${v.thumbnail}">
-          <div class="duration">${v.duration || "00:00"}</div>
+
+          <img src="${v.thumbnail || ''}"
+               alt="${v.title || ''}">
+
+          <div class="duration">
+            ${v.duration || "00:00"}
+          </div>
+
         </div>
 
         <div class="video-info">
-          <div class="video-title">${v.title}</div>
-          <div class="video-meta">${v.views || 0} views • ${v.category || ""}</div>
+
+          <div class="video-title">
+            ${v.title || ""}
+          </div>
+
+          <div class="video-meta">
+
+            ${v.views || 0} views
+
+            •
+
+            ${v.category || "General"}
+
+            •
+
+            ${v.country || ""}
+
+          </div>
+
         </div>
 
       </a>
+
     `;
   });
 }
 
-
-/* SEARCH */
-document.querySelector(".search button").addEventListener("click",()=>{
-  const q = document.querySelector(".search input").value.toLowerCase();
-
-  const filtered = allVideos.filter(v =>
-    v.title.toLowerCase().includes(q)
-  );
-
-  renderVideos(filtered);
-});
+/* START */
 
 loadVideos();
 
 </script>
+
 </body>
 </html>
-
-
