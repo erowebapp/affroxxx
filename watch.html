@@ -75,7 +75,24 @@ width:100%;
 height:100%;
 border:none;
 }
+.player{
+    width:100%;
+    max-width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
 
+.player iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100% !important;
+    height:100% !important;
+    border:none;
+}
 .title{
 font-size:24px;
 margin-top:15px;
@@ -93,6 +110,11 @@ padding:15px;
 border-radius:8px;
 margin-top:15px;
 line-height:1.6;
+}
+  html,
+body{
+    width:100%;
+    overflow-x:hidden;
 }
 
 .ad-slot{
@@ -201,9 +223,7 @@ Join WhatsApp
 
 <div>
 
-<div class="player">
-<iframe id="player" allowfullscreen></iframe>
-</div>
+<div class="player" id="playerContainer"></div>
 <div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap;">
 
 <button class="btn" onclick="downloadVideo()">
@@ -403,9 +423,14 @@ document.getElementById("videoMeta")
 .innerText =
 `${video.views || 0} views`;
 
-document.getElementById("player")
-.src =
-video.embed_url || "";
+const container = document.getElementById("playerContainer");
+
+if(video.embed_url?.includes("<iframe")){
+    container.innerHTML = video.embed_url;
+}else{
+    container.innerHTML =
+    `<iframe src="${video.embed_url}" allowfullscreen></iframe>`;
+}
 
 await updateDoc(ref,{
 views: increment(1)
