@@ -386,7 +386,12 @@ doc(db,"videos",videoId);
 
 const snap =
 await getDoc(ref);
+console.log("Video ID:", videoId);
+console.log("Exists:", snap.exists());
 
+if(snap.exists()){
+  console.log("Video Data:", snap.data());
+}
 if(!snap.exists()){
 
 document.getElementById("videoTitle")
