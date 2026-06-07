@@ -64,7 +64,7 @@ gap:20px;
 
 .player{
     width:100%;
-    min-height:500px;
+    aspect-ratio:16/9;
     background:#000;
     border-radius:10px;
     overflow:hidden;
@@ -72,7 +72,7 @@ gap:20px;
 
 .player iframe{
     width:100%;
-    min-height:500px;
+    height:100%;
     border:none;
     display:block;
 }
@@ -135,7 +135,17 @@ border:1px solid #333;
 color:white;
 border-radius:5px;
 }
-
+.player iframe,
+.player embed,
+.player video{
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+}
+    .ad-slot{
+    overflow:hidden;
+    max-width:100%;
+}
 .sidebar{
 position:sticky;
 top:80px;
@@ -412,8 +422,9 @@ const container = document.getElementById("playerContainer");
 
 if(video.embed_url?.includes("<iframe")){
 container.innerHTML = video.embed_url
-.replace(/width="[^"]*"/g,'')
-.replace(/height="[^"]*"/g,'');
+.replace(/width="[^"]*"/gi,'')
+.replace(/height="[^"]*"/gi,'')
+.replace(/style="[^"]*"/gi,'');
 }else{
     container.innerHTML =
     `<iframe src="${video.embed_url}" allowfullscreen></iframe>`;
