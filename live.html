@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AFFRIBO LIVE</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:white;
+}
+
+header{
+background:#000;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #222;
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#ff6600;
+}
+
+.btn{
+background:#ff6600;
+border:none;
+padding:10px 15px;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:15px;
+}
+
+.player{
+width:100%;
+aspect-ratio:16/9;
+background:black;
+border-radius:10px;
+overflow:hidden;
+}
+
+.player iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.live-bar{
+display:flex;
+align-items:center;
+gap:15px;
+margin-top:15px;
+flex-wrap:wrap;
+}
+
+.live-badge{
+background:red;
+padding:6px 12px;
+border-radius:20px;
+font-weight:bold;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+50%{opacity:.5;}
+}
+
+.counter{
+color:#ccc;
+}
+
+.like-btn{
+background:#ff6600;
+border:none;
+padding:8px 15px;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.title{
+font-size:24px;
+margin-top:15px;
+}
+
+.comments{
+margin-top:25px;
+}
+
+.comment{
+background:#1a1a1a;
+padding:10px;
+border-radius:6px;
+margin-bottom:8px;
+}
+
+.comment-user{
+font-weight:bold;
+margin-bottom:4px;
+}
+
+.comment-input{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#111;
+border:1px solid #333;
+color:white;
+border-radius:5px;
+}
+
+.ad{
+margin:20px 0;
+padding:20px;
+background:#1b1b1b;
+border:1px dashed #444;
+border-radius:8px;
+text-align:center;
+color:#888;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+AFFRIBO LIVE
+</div>
+
+<button class="btn" onclick="joinWA()">
+Join WhatsApp
+</button>
+
+</header>
+
+<div class="container">
+
+<div class="player">
+
+<iframe
+id="livePlayer"
+allowfullscreen
+allow="autoplay">
+</iframe>
+
+</div>
+
+<div class="live-bar">
+
+<div class="live-badge">
+🔴 LIVE
+</div>
+
+<div class="counter">
+👁 <span id="viewerCount">0</span> Watching
+</div>
+
+<div class="counter">
+❤️ <span id="likeCount">0</span> Likes
+</div>
+
+<button class="like-btn" onclick="likeLive()">
+❤️ Like
+</button>
+
+</div>
+
+<h1 id="liveTitle" class="title">
+Loading Live...
+</h1>
+
+<div class="ad">
+
+YOUR LIVE AD SLOT
+
+</div>
+
+<div class="comments">
+
+<h2>Live Chat</h2>
+
+<div id="commentsBox"></div>
+
+<input
+id="commentInput"
+class="comment-input"
+placeholder="Join the conversation..."
+>
+
+<button
+class="btn"
+style="margin-top:10px;"
+onclick="postComment()">
+Send Comment
+</button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc,
+increment,
+addDoc,
+collection,
+serverTimestamp,
+query,
+where,
+onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyALWW2yra6_6Hxr-hWQdXXXF0DDMOShq3k",
+authDomain:"affroxxx.firebaseapp.com",
+projectId:"affroxxx",
+storageBucket:"affroxxx.firebasestorage.app",
+messagingSenderId:"201165572616",
+appId:"1:201165572616:web:bcd3d24fae7be3cdec9fbd"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+let currentUser = null;
+
+window.joinWA = function(){
+
+window.open(
+"https://chat.whatsapp.com/EnTu7Uj8aezAiaCsNs2tYd",
+"_blank"
+);
+
+};
+
+onAuthStateChanged(auth,(user)=>{
+
+currentUser = user;
+
+});
+
+async function loadLive(){
+
+const ref = doc(db,"live","current");
+
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+
+document.getElementById("liveTitle")
+.innerText = "No Live Stream";
+
+return;
+
+}
+
+const live = snap.data();
+
+document.getElementById("liveTitle")
+.innerText = live.title || "AFFRIBO LIVE";
+
+document.getElementById("livePlayer")
+.src = live.embed_url || "";
+
+document.getElementById("viewerCount")
+.innerText = live.viewers || 0;
+
+document.getElementById("likeCount")
+.innerText = live.likes || 0;
+
+await updateDoc(ref,{
+viewers: increment(1)
+});
+
+}
+
+window.likeLive = async function(){
+
+const ref = doc(db,"live","current");
+
+await updateDoc(ref,{
+likes: increment(1)
+});
+
+const snap = await getDoc(ref);
+
+document.getElementById("likeCount")
+.innerText = snap.data().likes || 0;
+
+};
+
+window.postComment = async function(){
+
+if(!currentUser){
+
+const provider =
+new GoogleAuthProvider();
+
+await signInWithPopup(auth,provider);
+
+return;
+
+}
+
+const text =
+document.getElementById("commentInput")
+.value.trim();
+
+if(!text) return;
+
+await addDoc(
+collection(db,"liveComments"),
+{
+userName:
+currentUser.displayName,
+text,
+createdAt:
+serverTimestamp()
+}
+);
+
+document.getElementById("commentInput")
+.value="";
+
+};
+
+function listenComments(){
+
+const q =
+query(collection(db,"liveComments"));
+
+onSnapshot(q,(snap)=>{
+
+const box =
+document.getElementById("commentsBox");
+
+box.innerHTML="";
+
+snap.forEach(doc=>{
+
+const c = doc.data();
+
+box.innerHTML += `
+<div class="comment">
+
+<div class="comment-user">
+${c.userName || "User"}
+</div>
+
+<div>
+${c.text}
+</div>
+
+</div>
+`;
+
+});
+
+});
+
+}
+
+loadLive();
+listenComments();
+
+</script>
+
+</body>
+</html>
