@@ -348,44 +348,13 @@ window.open(
 );
 
 };
-  window.openLive = function(){
-    window.open(
-        "https://your-live-page.html",
-        "_blank"
-    );
+window.openLive = function(){
+    location.href="/affroxxx/live.html";
 };
 
 onAuthStateChanged(auth,(user)=>{
-
-currentUser = user;
-
-document.getElementById("authBtn")
-.innerText =
-user ? "Logout" : "Login";
-
+    currentUser = user;
 });
-
-document.getElementById("authBtn")
-.onclick = async ()=>{
-
-if(currentUser){
-
-await signOut(auth);
-
-}else{
-
-const provider =
-new GoogleAuthProvider();
-
-await signInWithPopup(
-auth,
-provider
-);
-
-}
-
-};
-
 async function loadVideo(){
 
 if(!videoId){
@@ -486,7 +455,13 @@ async function(){
 
 if(!currentUser){
 
-alert("Please login first");
+const provider =
+new GoogleAuthProvider();
+
+await signInWithPopup(
+auth,
+provider
+);
 
 return;
 
@@ -516,7 +491,19 @@ document.getElementById("commentInput")
 loadComments();
 
 };
+window.downloadVideo = function(){
 
+alert(
+"Downloads are not available for this video."
+);
+
+};
+  window.closeDownloadPopup = function(){
+
+document.getElementById("downloadPopup")
+.style.display = "none";
+
+};
 async function loadRelated(video){
 
 const box =
