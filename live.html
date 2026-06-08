@@ -306,7 +306,8 @@ return;
 }
 
 const live = snap.data();
-
+console.log("LIVE DATA:", live);
+console.log("EMBED URL:", live.embed_url);
 document.getElementById("liveTitle")
 .innerText = live.title || "AFFRIBO LIVE";
 
